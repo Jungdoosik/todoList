@@ -1,35 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import './App.css'
 
-function App() {
-  const [todoList, setTodoList] = useState([])
-  const [sequance, setSequance] = useState(null)
+export function App() {
+  const [todoList, setTodoList] = useState([]);
+  const [sequance, setSequance] = useState(null);
   const refTodoItem = useRef();
 
-  useEffect(() => {
+  useEffect(() => { //로컬 스토리지에 미리 sequance, todoList 삽입
+    setTodoList(JSON.parse(window.localStorage.getItem("todoList")));
     let sequance = window.localStorage.getItem("sequance");
     if (sequance === null) {
       window.localStorage.setItem("sequance", "0");
       sequance = 0;
     }
     const handleSetInit = () => {
-      window.localStorage.setItem("todoList", "[]");
-      return "[]"
-    }
+      window.localStorage.setItem("todoList", "[{},{}]");
+      return "[]";
+    };
 
     let todo = JSON.parse(window.localStorage.getItem("todoList") ?? handleSetInit());
 
     setTodoList(todo);
     setSequance(Number(sequance));
-  }, [])
+  }, []);
 
   const handleTodoAdd = (item) => {
     if (sequance === null) {
-      return
+      return;
     }
     if (item === '') {
-      return
+      return;
     }
 
     let todo = [...todoList];
@@ -40,8 +40,8 @@ function App() {
 
     setTodoList(todo);
     setSequance(sequance + 1);
-    refTodoItem.current.value = ''
-  }
+    refTodoItem.current.value = '';
+  };
 
   const handleTodoCheck = (tf, i) => {
     let todo = [...todoList];
@@ -49,7 +49,7 @@ function App() {
 
     window.localStorage.setItem("todoList", JSON.stringify(todo));
     setTodoList(todo);
-  }
+  };
 
   const handleTodoDelete = (id) => {
     let todo = [...todoList];
@@ -58,7 +58,7 @@ function App() {
     window.localStorage.setItem("todoList", JSON.stringify(todo));
     setTodoList(todo);
 
-  }
+  };
   return (
     <div className='mainLayout'>
       <div className='todoLayout'>
@@ -96,5 +96,4 @@ function App() {
   );
 }
 
-export default App;
-
+export default App
