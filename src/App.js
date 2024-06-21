@@ -18,7 +18,7 @@ export function App() {
       sequance = 0;
     }
     const handleSetInit = () => {
-      window.localStorage.setItem("todoList", "[{},{}]");
+      window.localStorage.setItem("todoList", "[]");
       return "[]";
     };
 
@@ -65,7 +65,6 @@ export function App() {
 
   const handleChooseDate = (val) => {
     let date = moment(val).format('YYYYMMDD');
-    console.log(date)
     setChooseDate(date);
 
   }
@@ -82,6 +81,46 @@ export function App() {
               formatDay={(locale, date) => moment(date).format('D')}
               onChange={(value) => handleChooseDate(value)}
               value={chooseDate}
+              tileContent={({ date, view }) => {
+                console.log("======")
+                const html = [];
+                // const array = [];
+                let redDot = 0;
+                let greenDot = 0;
+                for (let i = 0; i < todoList.length; i++) {
+                  if (moment(date).format('YYYYMMDD') === todoList[i].chooseDate) {
+                    if (todoList[i].tf === false) {
+                      redDot++
+                    } else if (todoList[i].tf === true) {
+                      greenDot++
+                    }
+                    // if (array.length === 0) {
+                    //   array.push({ tf: todoList[i].tf, id: todoList[i].id, text: todoList[i].text })
+                    // } else {
+                    //   array.push({ tf: todoList[i].tf, id: todoList[i].id, text: todoList[i].text })
+                    // }
+                  }
+                }
+                console.log(redDot)
+                console.log(greenDot)
+                if (redDot > 0 && greenDot > 0) {
+                  html.push(<div className="yellowDot"></div>);
+                } else if (redDot > 0 && greenDot === 0) {
+                  html.push(<div className="redDot"></div>);
+                } else if (redDot === 0 && greenDot > 0) {
+                  html.push(<div className="greenDot"></div>);
+                } else {
+                  html.push(<div className="noDot"></div>);
+                }
+                return (
+                  <div className='dotArea'>
+                    {html}
+                  </div>
+                );
+
+
+
+              }}
             />
           </div>
           <div className='todoAdd'>
@@ -95,8 +134,9 @@ export function App() {
           </div>
           {
             todoList.map((item, i) => {
+              const html = [];
               if (item.chooseDate === moment(chooseDate).format('YYYYMMDD')) {
-                return (
+                html.push(
                   <div className='todoItem' key={i}>
                     <div className='todoCheckBox' onClick={() => handleTodoCheck(item.tf, i)}>
                       <div className='checkIcon'>
@@ -110,6 +150,11 @@ export function App() {
                   </div>
                 )
               }
+              return (
+                <div key={i}>
+                  {html}
+                </div>
+              )
             }
             )
           }

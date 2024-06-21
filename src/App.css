@@ -123,3 +123,44 @@
 	font-size: 18px;
 	text-align: left;
 }
+
+.dotArea {
+	display: flex;
+	justify-content: center;
+}
+
+.greenDot {
+	height: 8px;
+	width: 8px;
+	background-color: #06c520;
+	border-radius: 50%;
+	text-align: center;
+	margin-top: 3px;
+}
+
+.redDot {
+	height: 8px;
+	width: 8px;
+	background-color: #d81111;
+	border-radius: 50%;
+	text-align: center;
+	margin-top: 3px;
+}
+
+.yellowDot {
+	height: 8px;
+	width: 8px;
+	background-color: #f7e70e;
+	border-radius: 50%;
+	text-align: center;
+	margin-top: 3px;
+}
+
+.noDot {
+	height: 8px;
+	width: 8px;
+	background-color: #51f8c300;
+	border-radius: 50%;
+	text-align: center;
+	margin-top: 3px;
+}
