@@ -127,7 +127,9 @@ export function App() {
             <input
               type='text'
               placeholder='할 일을 입력하세요.'
-              ref={refTodoItem} />
+              ref={refTodoItem}
+              style={{ fontSize: 17 }}
+            />
             <div onClick={() => handleTodoAdd(refTodoItem.current.value)}>
               +
             </div>
