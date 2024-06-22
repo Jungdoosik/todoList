@@ -84,7 +84,6 @@ export function App() {
               tileContent={({ date, view }) => {
                 console.log("======")
                 const html = [];
-                // const array = [];
                 let redDot = 0;
                 let greenDot = 0;
                 for (let i = 0; i < todoList.length; i++) {
@@ -94,15 +93,8 @@ export function App() {
                     } else if (todoList[i].tf === true) {
                       greenDot++
                     }
-                    // if (array.length === 0) {
-                    //   array.push({ tf: todoList[i].tf, id: todoList[i].id, text: todoList[i].text })
-                    // } else {
-                    //   array.push({ tf: todoList[i].tf, id: todoList[i].id, text: todoList[i].text })
-                    // }
                   }
                 }
-                console.log(redDot)
-                console.log(greenDot)
                 if (redDot > 0 && greenDot > 0) {
                   html.push(<div className="yellowDot"></div>);
                 } else if (redDot > 0 && greenDot === 0) {
@@ -117,9 +109,6 @@ export function App() {
                     {html}
                   </div>
                 );
-
-
-
               }}
             />
           </div>
